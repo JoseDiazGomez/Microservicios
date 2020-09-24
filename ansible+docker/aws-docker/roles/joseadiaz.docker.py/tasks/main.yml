@@ -1,0 +1,8 @@
+---
+  - name: Install python-setuptools
+    apt:
+      name: python-setuptools
+      
+  - name: Install docker pip
+    pip:
+      name: docker-py

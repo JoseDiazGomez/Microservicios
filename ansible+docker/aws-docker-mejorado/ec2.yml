@@ -1,0 +1,50 @@
+---
+- name: Aprovisionar instancia EC2
+  hosts: ec2
+  connection: local
+  gather_facts: False
+  tags: provisioning
+  tasks:
+    - include_vars: vars/instancia.yml
+
+    - name: Crear grupo de seguridad
+      local_action:
+        module: ec2_group
+        name: "{{ security_group }}"
+        description: Grupo de seguridad
+        region: "{{ region }}"
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        rules:
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: "{{ puerto_externo }}"
+            to_port: "{{ puerto_interno }}"
+            cidr_ip: 0.0.0.0/0
+        rules_egress:
+          - proto: all
+            cidr_ip: 0.0.0.0/0
+      register: basic_firewall
+
+    - name: Lanzar instancia EC2
+      ec2:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        group: "{{ security_group }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ image }}"
+        wait: true
+        region: "{{ region }}"
+        keypair: "{{ keypair }}"
+        count: "{{ count }}"
+      register: ec2
+
+    - name: Obtener variable EC2
+      debug: var=ec2
+    - name: Obtener dirección Ip
+      debug: var=ec2.instances[0].public_ip
+
+     

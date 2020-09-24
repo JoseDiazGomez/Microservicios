@@ -1,0 +1,19 @@
+---
+- name: Desplegar contenedor WordPress
+  docker_container:
+    name: "{{ container_name_wordpress }}"
+    image: "{{ container_wordpress_image }}"
+    volumes:
+       - "{{ container_mysql_volume }}:/var/www/html"
+    ports: 
+      - "{{ container_http_port_publish_wordpress }}:{{ container_http_port_private_wordpress }}"
+    env:
+      WORDPRESS_DB_HOST: "{{ db_host }}"
+      WORDPRESS_DB_USER: "{{ user_mysql }}"
+      WORDPRESS_DB_PASSWORD: "{{ password_user_mysql }}"
+      WORDPRESS_DB_NAME: "{{ database_mysql }}"
+    networks:
+      - name: prueba
+        ipv4_address: 192.168.100.3
+    state: started
+    restart: yes

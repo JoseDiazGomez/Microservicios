@@ -1,0 +1,7 @@
+container_name_wordpress: "WordPress"
+container_wordpress_image: "wordpress:latest"
+container_wordpress_volume: "/wordpress"
+container_http_port_publish_wordpress: "8080"
+container_http_port_private_wordpress: "80"
+db_host: "mysql"
+

@@ -1,0 +1,20 @@
+---
+- name: Creando docker instancia AWS
+  hosts: aws
+  become: true
+  roles:
+    - geerlingguy.docker
+    - geerlingguy.pip
+    - role: joseadiaz.docker.py
+  tasks:
+   - include_vars: vars/mysql.yml
+   - include_vars: vars/wordpress.yml
+   - name: Create network
+     docker_network:
+       name: prueba
+       ipam_options:
+         subnet: 192.168.100.0/24
+       driver_options:
+         com.docker.network.bridge.name: prueba
+   - include: tasks/mysql.yml
+   - include: tasks/wordpress.yml

@@ -1,0 +1,19 @@
+---
+- name: Desplegar contenedor base de datos
+  docker_container:
+    name: "{{ container_name_mysql }}"
+    image: "{{ container_mysql_image }}"
+    volumes:
+       - "{{ container_mysql_volume }}:/var/lib/mysql"
+    ports:
+      - "{{ container_port_publish_mysql }}:{{ container_port_private_mysql }}"
+    env:
+      MYSQL_ROOT_PASSWORD: "{{ password_root_mysql }}"
+      MYSQL_DATABASE: "{{ database_mysql }}"
+      MYSQL_USER: "{{ user_mysql }}"
+      MYSQL_PASSWORD: "{{ password_user_mysql }}"
+    networks:
+      - name: prueba
+        ipv4_address: 192.168.100.2
+    state: started
+    restart: yes

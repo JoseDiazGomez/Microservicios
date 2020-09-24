@@ -1,0 +1,14 @@
+---
+- name: Desplegar contenedor WordPress
+  docker_container:
+    name: "{{ container_name_wordpress }}"
+    image: "{{ container_wordpress_image }}"
+    ports: 
+      - "{{ container_http_port_publish_wordpress }}:{{ container_http_port_private_wordpress }}"
+    env:
+      WORDPRESS_DB_HOST: "{{  }}"
+      WORDPRESS_DB_USER: "{{ user_mysql }}"
+      WORDPRESS_DB_PASSWORD: "{{ database_mysql }}"
+      WORDPRESS_DB_NAME: "{{ db_wordpress_name }}"
+    state: started
+    restart: yes

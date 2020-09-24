@@ -1,0 +1,2 @@
+[aws]
+aws ansible_host=3.12.34.13 ansible_user=ubuntu

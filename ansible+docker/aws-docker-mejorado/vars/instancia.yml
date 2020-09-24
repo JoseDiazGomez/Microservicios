@@ -1,0 +1,11 @@
+instance_type: t2.micro
+security_group: grupo_seguridad
+image: ami-02a599eb01e3b3c5b
+keypair: AWS-sidney
+region: ap-southeast-2
+hostname: wordpress
+aws_access_key: AKIA5KKENZRNXGM3HQXT
+aws_secret_key: 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
+puerto_externo: 80
+puerto_interno: 8080
+count: 1
