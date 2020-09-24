@@ -1,0 +1,2 @@
+[webservers]
+webserver ansible_host=192.168.15.19 ansible_user=root

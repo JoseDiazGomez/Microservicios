@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: true
+  tasks:
+   - name: Updating apt cache
+     apt: update_cache=yes state=latest force_apt_get=yes
+   - include: tasks/apache.yml
+   - include: tasks/mysql.yml
+   - include: tasks/php.yml
+  handlers:
+   - name: restart apache2
+     service: name=apache2 state=restarted
+   - name: restart mysql
+     service: name=mysql state=restarted
+   - name: reload apache2
+     service: name=mysql state=reloaded
+

@@ -1,0 +1,4 @@
+---
+
+webserver_root: "/var/www/html"
+dbhost: "localhost"

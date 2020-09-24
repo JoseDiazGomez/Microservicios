@@ -1,0 +1,62 @@
+.element {
+    margin: 1px;
+    height: 70px;
+    color: white;
+}
+.ghost {
+    margin: 1px;
+    height: 70px;
+}
+.empty {
+    background: #87939a;
+}
+.element img {
+    margin: 4px;
+    max-width: 100%;
+    max-height: 62px;
+}
+.zone_1 {
+    box-shadow:inset 0px 0px 0px 4px #e8bc35;
+}
+.zone_2 {
+    box-shadow:inset 0px 0px 0px 4px #f17c30;
+}
+.zone_3 {
+    box-shadow:inset 0px 0px 0px 4px #18a2a0;
+}
+.zone_4 {
+    box-shadow:inset 0px 0px 0px 4px #da5439;
+}
+.zone_5 {
+    box-shadow:inset 0px 0px 0px 4px #666666;
+}
+.zone_6 {
+    box-shadow:inset 0px 0px 0px 4px #0f65cb;
+}
+.zone_7 {
+    box-shadow:inset 0px 0px 0px 4px #19984b;
+}
+.zone_8 {
+    box-shadow:inset 0px 0px 0px 4px #999999;
+}
+.zone_9 {
+    box-shadow:inset 0px 0px 0px 4px #7f0f7e;
+}
+.zone_10 {
+    box-shadow:inset 0px 0px 0px 4px #043464;
+}
+.zone_11 {
+    box-shadow:inset 0px 0px 0px 4px #a8277d;
+}
+.zone_12 {
+    box-shadow:inset 0px 0px 0px 4px #59adeb;
+}
+.zone_13 {
+    box-shadow:inset 0px 0px 0px 4px #444444;
+}
+.zone_14 {
+    box-shadow:inset 0px 0px 0px 4px #64b94d;
+}
+.zone_15 {
+    box-shadow:inset 0px 0px 0px 4px #107c78;
+}

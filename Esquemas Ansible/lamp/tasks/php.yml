@@ -1,0 +1,5 @@
+---
+- name: Install php7
+  apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
+  loop: ['php7.0', 'php7.0-cli', 'libapache2-mod-php7.0', 'php7.0-mysql']
+  notify: restart apache2

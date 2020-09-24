@@ -1,0 +1,5 @@
+---
+- name: vsftpd servers playbook
+  hosts: vsftpd
+  roles:
+    - role: weareinteractive.vsftpd 

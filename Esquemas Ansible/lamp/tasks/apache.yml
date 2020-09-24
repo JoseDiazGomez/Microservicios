@@ -1,0 +1,36 @@
+---
+- name: Install apache2
+  apt: name=apache2 state=present
+
+- name: Create new virtual site
+  template:
+   src: ansiblesite.conf.j2
+   dest: /etc/apache2/sites-available/lampsite.conf
+
+- name: Active new virtual site
+  file: 
+   src: /etc/apache2/sites-available/lampsite.conf
+   dest: /etc/apache2/sites-enabled/lampsite.conf
+
+- name: Create dir site
+  file: path=/var/www/html/lamp state=directory
+
+- name: Add index to new site
+  template: 
+   src: index.html.j2
+   dest: /var/www/html/lamp/index.html
+  notify:
+   - restart apache2
+
+- name: Add consult database
+  copy:
+   src: files/Periodic-Table
+   dest: /var/www/html/lamp/
+   owner: www-data
+   group: www-data
+
+- name: Disable default site
+  file:
+   path: /etc/apache2/sites-enabled/000-default.conf
+   state: absent
+  notify: restart apache2

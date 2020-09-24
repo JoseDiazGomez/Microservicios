@@ -1,0 +1,47 @@
+---
+- name: Add PGP key
+  apt_key:
+    keyserver: pgpkeys.mit.edu
+    id: 8C718D3B5072E1F5
+
+- name: Add official APT repository
+  apt_repository:
+    repo: "deb http://repo.mysql.com/apt/debian/ jessie mysql-5.7"
+
+- name: Install mysql-server
+  apt:
+    name: "{{item}}"
+    state: present
+    update_cache: yes
+  with_items:
+    - mysql-server
+    - python-mysqldb
+  notify:
+    - restart mysql
+
+- name: Add user
+  mysql_user:
+    name: jose
+    host: localhost
+    password: jose
+    priv: dbDevops.*:ALL,GRANT
+    login_user: root
+    login_password: bolson
+
+- name: Adding dbDevops
+  mysql_db: 
+    name: dbDevops
+    state: present
+  notify:
+    - restart mysql
+
+- name: Copy .sql
+  copy:
+   src: files/dbDevops.sql
+   dest: /root/
+
+- name: Import dbDevops.sql
+  mysql_db: 
+    state: import
+    name: dvDevops
+    target: /root/dbDevops.sql
